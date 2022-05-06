@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "HeaderTemplate";
+}
+
+<h2>HeaderTemplate</h2>
+
+@Html.EJS().Grid("HeaderTemplate").DataSource((IEnumerable<object>)ViewBag.dataSource).Columns(col =>
+{
+
+    col.Field("OrderID").HeaderText("Order ID").Width("120").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Add();
+    col.Field("CustomerID").HeaderText("Customer Name").HeaderTemplate("#customertemplate").Width("150").Add();
+    col.Field("OrderDate").HeaderText("Order Date").HeaderTemplate("#datetemplate").Width("130").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Format("yMd").Add();
+    col.Field("ShipCountry").HeaderText("Ship Country").Width("120").Add();
+
+}).AllowPaging().Render()
+
+
+<style>
+    .e-grid .e-icon-userlogin::before {
+        width: 15px !important;
+        content: '\e7d4';
+    }
+
+    .e-grid .e-icon-calender::before {
+        width: 15px !important;
+        content: '\e7b5';
+    }
+</style>
+
+
+<script id="datetemplate" type="text/x-template">
+    <span class="e-icon-calender e-icons headericon"></span> Date of Order
+</script>
+
+<script id="customertemplate" type="text/x-template">
+    <span class="e-icon-userlogin e-icons employee"></span> Customer ID
+</script>

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "RenderImageInAColumn";
+}
+
+<h2>RenderImageInAColumn</h2>
+
+@Html.EJS().Grid("FlatGrid").DataSource((IEnumerable<object>)ViewBag.dataSource).Width("auto").Height("359").Columns(col =>
+{
+    col.HeaderText("Customer Image").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Template("#template").Width("150").Add();
+    col.Field("OrderID").HeaderText("Order ID").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("120").Add();
+    col.Field("CustomerID").HeaderText("Customer Name").Width("150").Add();
+    col.Field("OrderDate").HeaderText("Order Date").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("130").Format("yMd").Add();
+    col.Field("Freight").HeaderText("Freight").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("120").Format("C2").Add();
+    col.Field("ShippedDate").HeaderText("Shipped Date").Width("140").Format("yMd").Add();
+    col.Field("ShipCountry").HeaderText("Ship Country").Width("150").Add();
+
+}).Render()
+
+<style>
+    .image img {
+        height: 55px;
+        width: 55px;
+        border-radius: 50px;
+        box-shadow: inset 0 0 1px #e0e0e0, inset 0 0 14px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<script id="template" type="text/x-template">
+    <div class="image">
+        <img src="/Content/images/Customer/${OrderID}.png" alt="${OrderID}" />
+    </div>
+</script>

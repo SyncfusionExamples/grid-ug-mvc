@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "UsingConditionTemplate";
+}
+
+<h2>UsingConditionTemplate</h2>
+
+@Html.EJS().Grid("LocalData").DataSource((IEnumerable<object>)ViewBag.dataSource).Columns(col =>
+{
+    col.HeaderText("Delivered").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Center).Template("#template").Width("150").Add();
+    col.Field("OrderID").HeaderText("Order ID").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("120").Add();
+    col.Field("CustomerID").HeaderText("Customer Name").Width("150").Add();
+    col.Field("OrderDate").HeaderText("Order Date").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("130").Format("yMd").Add();
+    col.Field("Freight").HeaderText("Freight").TextAlign(Syncfusion.EJ2.Grids.TextAlign.Right).Width("120").Format("C2").Add();
+    col.Field("ShippedDate").HeaderText("Shipped Date").Width("140").Format("yMd").Add();
+    col.Field("ShipCountry").HeaderText("Ship Country").Width("150").Add();
+
+}).AllowPaging().Render()
+
+<script id="template" type="text/x-template">
+    <div class="template_checkbox">
+        ${if(Delivered)}
+        <input type="checkbox" checked> ${else}
+        <input type="checkbox"> ${/if}
+    </div>
+</script>
